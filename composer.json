@@ -8,14 +8,12 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "5.0.*"
+        "php": ">=5.4.0"
     },
     "autoload": {
-        "psr-4": {
-            "martin\\RpbeAuth\\": "src/RpbeAuth"
-        }
+        "psr-4": { "RpbeAuth\\": "src/" }
 
     },
+
     "minimum-stability": "stable"
 }

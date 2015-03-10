@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Martin\\RpbeAuth": "src/RpbeAuth"
+            "martin\\RpbeAuth\\": "src/RpbeAuth"
         }
 
     },

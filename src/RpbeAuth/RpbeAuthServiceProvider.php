@@ -1,4 +1,4 @@
-<?php namespace martin\RpbeAuth;
+<?php namespace RpbeAuth;
 
 use Illuminate\Support\ServiceProvider;
 

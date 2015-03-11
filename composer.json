@@ -1,6 +1,7 @@
 {
     "name": "RpbeAuth",
     "description": "",
+    "type": "library",
     "authors": [
         {
             "name": "Martin Schäpker",

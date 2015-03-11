@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=5.9.0",
+        "php": ">=5.4",
         "laravel/framework": ">=5.0"
     },
     "autoload": {

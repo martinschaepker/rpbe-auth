@@ -1,7 +1,6 @@
 {
-    "name": "RpbeAuth",
+    "name": "rpbeauth",
     "description": "",
-    "type": "composer-plugin",
     "authors": [
         {
             "name": "Martin Schäpker",

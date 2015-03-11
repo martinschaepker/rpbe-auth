@@ -1,4 +1,4 @@
-<?php namespace  RpbeAuth\Middelware;
+<?php namespace  RpbeAuth\Http\Middelware;
 
 
 class RpbeAuth {

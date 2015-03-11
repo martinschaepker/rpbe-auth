@@ -1,5 +1,5 @@
 {
-    "name": "martinschaepker/rpbeauth",
+    "name": "RpbeAuth",
     "description": "",
     "type": "library",
     "authors": [
@@ -14,9 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "RpbeAuth\\": "vendor/RpbeAuth/src",
-            "RpbeAuth\\Middelware\\": "vendor/RpbeAuth/src/RpbeAuth/Middelware"
-        }
+            "RpbeAuth\\": "src"
 
     },
 

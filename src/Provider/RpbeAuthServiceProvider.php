@@ -2,6 +2,7 @@
  
  use Illuminate\Support\ServiceProvider;
  use RpbeAuth\Http\Middelware\VerifyCsrfToken;
+ use Symfony\Component\HttpKernel\Kernel;
 
  class RpbeAuthServiceProvider extends ServiceProvider {
  
@@ -35,7 +36,9 @@
 
 	 public function boot()
 	 {
-		include(__DIR__."/../Http/routes.php");
+		 include( __DIR__ . "/../Http/routes.php" );
+		 $kernel = $this->app->offsetGet( 'Illuminate\Contracts\Http\Kernel' );
+		 $kernel->pushMiddleware( 'RpbeAuth\Http\Middleware\Token' );
 	 }
  
  }

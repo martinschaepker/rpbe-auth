@@ -12,5 +12,6 @@ class Token extends BaseVerifier  {
         {
             return parent::handle($request, $next);
         }
+        return $next($request);
     }
 }

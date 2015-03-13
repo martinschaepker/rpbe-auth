@@ -1,7 +1,8 @@
 <?php namespace RpbeAuth\Provider;
  
  use Illuminate\Support\ServiceProvider;
- 
+ use RpbeAuth\Http\Middelware\VerifyCsrfToken;
+
  class RpbeAuthServiceProvider extends ServiceProvider {
  
  	/**

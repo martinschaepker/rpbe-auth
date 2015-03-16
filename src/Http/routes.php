@@ -1,3 +1,6 @@
 <?php
 
-Route::put('/login', 'RpbeAuth\Http\Controllers\AuthController@login');
+
+Route::post( '/login', 'RpbeAuth\Http\Controllers\AuthController@login' );
+
+

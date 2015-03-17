@@ -49,9 +49,8 @@ class Sha512Hasher implements HasherContract
      */
     public function make( $value, array $options = array() )
     {
-        $salt = $this->randomString( 32, true );
-
-        return hash( 'sha512', $value.$salt ).$salt;
+        $salt = $options['key'];
+         return hash( 'sha512', $value.$salt ).$salt;
     }
 
     /**

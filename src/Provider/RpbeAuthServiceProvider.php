@@ -19,18 +19,18 @@
          */
      public function register()
      {
-        $this->app['hash'] = $this->app->share( function () {
+         $this->app['hash'] = $this->app->share( function () {
             return new \RpbeAuth\Http\Middleware\Auth\Sha512Hasher();
         });
 
         $this->app['config']['auth.model'] = 'RpbeAuth\Http\Middleware\Model\User';
         
-        $this->app->bind( '\RpbeAuth\Http\Services\TokenUserService', function ($app ) {
-            $service = new \RpbeAuth\Http\Services\TokenUserService();
-             $service->setHasher( new \RpbeAuth\Http\Middleware\Auth\Sha512Hasher() );
+        $this->app->bind( '\RpbeAuth\Http\Middleware\Services\TokenUserService', function ($app ) {
+            $service = new \RpbeAuth\Http\Middleware\Services\TokenUserService();
+            $service->setHasher( new \RpbeAuth\Http\Middleware\Auth\Sha512Hasher() );
             $service->setUser( new \RpbeAuth\Http\Middleware\Model\User() );
-			$service->setAuthToken(new \RpbeAuth\Http\Middleware\Model\AuthToken);
-			$service->setEncrypter( new Encrypter($this->app['config']['app']['key']));
+            $service->setAuthToken(new \RpbeAuth\Http\Middleware\Model\AuthToken);
+            $service->setEncrypter( new Encrypter($this->app['config']['app']['key']));
             return $service;
             }
         );
@@ -50,8 +50,6 @@
      public function boot()
      {
          include( __DIR__ . "/../Http/routes.php" );
-         $kernel = $this->app->offsetGet( 'Illuminate\Contracts\Http\Kernel' );
-         $kernel->pushMiddleware( 'RpbeAuth\Http\Middleware\Token' );
      }
  
  }

@@ -2,14 +2,14 @@
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
-use RpbeAuth\Http\Services\TokenUserService;
+use RpbeAuth\Http\Middleware\Services\TokenUserService;
 
 class AuthController extends Controller {
 
     private $tokenUserService;
 
     /**
-     * @return \RpbeAuth\Http\Services\TokenUserService;
+     * @return \RpbeAuth\Http\Middleware\Services\TokenUserService;
      */
     public function getTokenUserService()
     {

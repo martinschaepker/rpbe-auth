@@ -50,6 +50,9 @@
      public function boot()
      {
          include( __DIR__ . "/../Http/routes.php" );
+         $this->publishes([
+             realpath(__DIR__.'/../migrations') => $this->app->databasePath().'/migrations',
+         ]);
      }
  
  }

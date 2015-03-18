@@ -9,7 +9,7 @@ class AuthToken extends Model
      *
      * @var string
      */
-    protected $table = 'ta_auth_tokens';
+    protected $table = 'auth_tokens';
 
     /**
      * The attributes that are mass assignable.

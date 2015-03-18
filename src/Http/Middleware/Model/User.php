@@ -5,8 +5,4 @@ use App\User as AppUser;
 
 class User extends AppUser  {
 
-    public function createToken()
-    {
-
-    }
 }

@@ -25,12 +25,12 @@
 
         $this->app['config']['auth.model'] = 'RpbeAuth\Http\Middleware\Model\User';
         
-        $this->app->bind( '\RpbeAuth\Http\Middleware\Services\TokenUserService', function ($app ) {
+        $this->app->bind( '\RpbeAuth\Http\Middleware\Services\TokenUserService', function ( $app ) {
             $service = new \RpbeAuth\Http\Middleware\Services\TokenUserService();
             $service->setHasher( new \RpbeAuth\Http\Middleware\Auth\Sha512Hasher() );
             $service->setUser( new \RpbeAuth\Http\Middleware\Model\User() );
-            $service->setAuthToken(new \RpbeAuth\Http\Middleware\Model\AuthToken);
-            $service->setEncrypter( new Encrypter($this->app['config']['app']['key']));
+            $service->setAuthToken(new \RpbeAuth\Http\Middleware\Model\AuthToken );
+            $service->setEncrypter( new Encrypter($this->app['config']['app']['key'] ) );
             return $service;
             }
         );

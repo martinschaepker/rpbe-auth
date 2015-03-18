@@ -82,16 +82,26 @@ class TokenUserService implements Middleware {
     public function createToken()
     {
         $id = $this->getUser()->id;
-        $this->getUser()->forceDelete();
-        $this->getAuthToken()->public_key           = $this->getHasher()->make( $this->getHasher()->randomString(20),array( 'key' => \Config::get('app.key') ) );
-        $this->getAuthToken()->private_key          = $this->getHasher()->make($this->getAuthToken()->public_key, array( 'key' => \Config::get('app.key') )  );
+        $this->getAuthToken()->where( 'auth_identifier', $id)->forceDelete();
+
+        $this->getAuthToken()->public_key           = $this->getHasher()->make(
+            $this->getHasher()->randomString( 20 ),
+            array( 'key' => \Config::get( 'app.key' )
+            )
+        );
+
+        $this->getAuthToken()->private_key          = $this->getHasher()->make(
+            $this->getAuthToken()->public_key,
+            array( 'key' => \Config::get( 'app.key' )
+            )
+        );
+
         $this->getAuthToken()->auth_identifier      = $id;
         $this->getAuthToken()->save();
     }
 
     public function getPublicToken()
     {
-
         $payload = $this->getEncrypter()->encrypt(
             array(
                 'id' => $this->getUser()->id,
@@ -99,17 +109,17 @@ class TokenUserService implements Middleware {
             )
         );
 
-        $payload = str_replace(array('+', '/', '\r', '\n', '='), array('-', '_'), $payload);
+        $payload = str_replace( array( '+', '/', '\r', '\n', '='), array( '-', '_' ), $payload );
         return $payload;
     }
 
 
-    public function handle( $request, \Closure $next)
+    public function handle( $request, \Closure $next )
     {
         $this->setAuthUser();
         if( !\Auth::check() )
         {
-            return \Response::json( array( 'error' => 'You are not authorized!' ),  401);
+            return \Response::json( array( 'error' => 'You are not authorized!' ),  401 );
         }
         return $next( $request );
     }
@@ -124,10 +134,14 @@ class TokenUserService implements Middleware {
         }
         if(empty($data['id']) || empty($data['key']) )
         {
-            return \Response::json( array( 'error' => 'You are not authorized!' ),  401);
+            return \Response::json( array( 'error' => 'You are not authorized!' ),  401 );
         }
+        $this->getAuthToken()->private_key      = substr( $this->getHasher()->make(
+            $data['key'] ,
+            array( 'key' => \Config::get('app.key')
+            )
+        ) ,0, 96);
 
-        $this->getAuthToken()->private_key      = substr( $this->getHasher()->make( $data['key'] ,array( 'key' => \Config::get('app.key') ) ) , 0, 96);
         $this->getAuthToken()->public_key       = substr( $data['key'], 0, 96 );
         $this->getAuthToken()->auth_identifier  = $data['id'];
     }
@@ -139,16 +153,15 @@ class TokenUserService implements Middleware {
         $checkToken = $this->getAuthToken();
 
         $storeToken = $this->getAuthToken()
-            ->where( 'auth_identifier', $checkToken->auth_identifier)
-            ->where( 'public_key', $checkToken->public_key)
-            ->where( 'private_key', $checkToken->private_key)
+            ->where( 'auth_identifier', $checkToken->auth_identifier )
+            ->where( 'public_key', $checkToken->public_key )
+            ->where( 'private_key', $checkToken->private_key )
             ->first();
 
         if( $storeToken === null ) {
             return \Response::json( array( 'error' => 'You are not authorized!' ),  401);
         }
-
-        \Auth::setUser( $this->getUser()->find($checkToken->auth_identifier) );
+        \Auth::setUser( $this->getUser()->find( $checkToken->auth_identifier ) );
     }
 
 }

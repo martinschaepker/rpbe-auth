@@ -10,6 +10,7 @@ use Illuminate\Contracts\Hashing\Hasher as HasherContract;
 class Sha512Hasher implements HasherContract
 {
 
+    private $algo = 'sha512';
     /**
      * Create a new Sha512 hasher instance.
      *
@@ -50,7 +51,8 @@ class Sha512Hasher implements HasherContract
     public function make( $value, array $options = array() )
     {
         $salt = $options['key'];
-         return hash( 'sha512', $value.$salt ).$salt;
+        
+        return hash( $this->algo, $value.$salt ).$salt;
     }
 
     /**
@@ -65,7 +67,7 @@ class Sha512Hasher implements HasherContract
     {
         $salt = substr($hashedValue, 128);
 
-        return ( hash( 'sha512', $value.$salt).$salt ) === $hashedValue;
+        return ( hash( $this->algo, $value.$salt).$salt ) === $hashedValue;
     }
 
     /**

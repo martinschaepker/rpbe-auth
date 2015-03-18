@@ -31,7 +31,6 @@ class AuthController extends Controller {
 
     public function login()
     {
-
         if( \Auth::check() || ( \Auth::attempt( array(
                 'email'    => \Input::get( 'email' ),
                 'password' => \Input::get( 'password' ),
@@ -45,15 +44,12 @@ class AuthController extends Controller {
 
             $user = \Auth::user();
 
-            \Log::info( 'Login', array( 'Context' => 'User: '.$user->email.' logged in' ) );
-
             return \Response::json( array( 'token'                   => $publicToken,
                                            'userid'                  => \Auth::user()->getAuthIdentifier(),
                                            'selectedProductLanguage' => $user->product_language,
                                            'channel'                 => $user->channel
             ), 200 );
         }
-        // User is not already logged in and uses the wrong credentials
         return \Response::json( array( 'error' => 'You are not authorized!' ), 401 );
     }
 }

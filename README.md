@@ -15,6 +15,14 @@
    
    	},
  ```
+ 
+ After composer install 
+ 
+ run
+  ```
+  php artisan vendor:publish
+  ```
+  
 #config/app.php
 ```
 'providers' => [

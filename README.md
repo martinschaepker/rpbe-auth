@@ -21,6 +21,10 @@
  run
   ```
   php artisan vendor:publish
+  
+  composer dump-autoload
+  
+  php artisan migrate
   ```
   
 #config/app.php

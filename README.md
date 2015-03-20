@@ -29,6 +29,8 @@
   
 #config/app.php
 ```
+'key' => env('APP_KEY', <string>),
+
 'providers' => [
  ...
 'RpbeAuth\Provider\RpbeAuthServiceProvider',

@@ -52,4 +52,15 @@ class AuthController extends Controller {
         }
         return \Response::json( array( 'error' => 'You are not authorized!' ), 401 );
     }
+
+    public function logout()
+    {
+        if(\Auth::check())
+        {
+            if( $this->getTokenUserService()->getAuthToken()->where( 'auth_identifier', \Auth::user()->id )->forceDelete() );
+            \Auth::logout();
+            return \Response::json( array( 'logout' =>  true ), 200 );
+        }
+
+    }
 }

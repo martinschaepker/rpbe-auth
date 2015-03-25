@@ -21,10 +21,16 @@
  run
   ```
   php artisan vendor:publish
+  
+  composer dump-autoload
+  
+  php artisan migrate
   ```
   
 #config/app.php
 ```
+'key' => env('APP_KEY', <string>),
+
 'providers' => [
  ...
 'RpbeAuth\Provider\RpbeAuthServiceProvider',

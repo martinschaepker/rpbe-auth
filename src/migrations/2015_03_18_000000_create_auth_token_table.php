@@ -34,6 +34,6 @@ class createAuthTokenTable extends Migration {
      */
     public function down()
     {
-        Schema::drop('ta_auth_tokens');
+        Schema::drop('auth_tokens');
     }
 }

@@ -50,9 +50,13 @@ class Sha512Hasher implements HasherContract
      */
     public function make( $value, array $options = array() )
     {
-        $salt = $options['key'];
-        
-        return hash( $this->algo, $value.$salt ).$salt;
+        if( array_key_exists( 'key', $options ) ) {
+
+            $salt = $options['key'];
+        } else {
+            $salt = $this->randomString( 20, true );
+        }
+        return hash( $this->algo, $value . $salt ) . $salt;
     }
 
     /**

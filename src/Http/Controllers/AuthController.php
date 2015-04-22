@@ -34,7 +34,7 @@ class AuthController extends Controller {
         if( \Auth::check() || ( \Auth::attempt( array(
                 'email'    => \Input::get( 'email' ),
                 'password' => \Input::get( 'password' ),
-                'active'   => 1
+                'is_active'   => 1
             ), false ) ) )
         {
 
